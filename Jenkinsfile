@@ -21,7 +21,7 @@ pipeline {
         
         stage('Push'){
             steps{
-        	     sh "sudo docker login -u choupaguy -p dckr_pat_OvN0lH_USJztUCkm0opyjz-yXNc"
+        	     sh "sudo docker login -u choupaguy -p dckr_pat_Yc4E-p7Yw0HTkCR1IDSvHB4IIXQ"
                  sh 'sudo docker push choupaguy/nodo-todo-app-test:latest'
             }
         }  
@@ -32,8 +32,8 @@ pipeline {
                 sh 'sudo docker rm nodetodoapp || true'
                 sh 'sudo docker run -d --name nodetodoapp choupaguy/nodo-todo-app-test:latest'
                 sh '''
-                ssh -i Ubuntudemo.pem -o StrictHostKeyChecking=no ubuntu@44.211.144.201 <<EOF
-                sudo docker login -u choupaguy -p dckr_pat_OvN0lH_USJztUCkm0opyjz-yXNc
+                ssh -i instance_key_pair.pem -o StrictHostKeyChecking=no ec2-user@34.201.166.180 <<EOF
+                sudo docker login -u choupaguy -p dckr_pat_Yc4E-p7Yw0HTkCR1IDSvHB4IIXQ
                 sudo docker pull choupaguy/nodo-todo-app-test:latest
                 sudo docker stop nodetodoapp || true
                 sudo docker rm nodetodoapp || true 
