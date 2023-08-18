@@ -32,7 +32,7 @@ pipeline {
                 sh 'sudo docker rm nodetodoapp || true'
                 sh 'sudo docker run -d --name nodetodoapp choupaguy/nodo-todo-app-test:latest'
                 sh '''
-                ssh -i "instance_key_pair.pem" -o StrictHostKeyChecking=no ec2-user@ec34.201.166.180 <<EOF
+                ssh -i 'instance_key_pair.pem' -o StrictHostKeyChecking=no ec2-user@ec34.201.166.180 <<EOF
                 sudo docker login -u choupaguy -p dckr_pat_Yc4E-p7Yw0HTkCR1IDSvHB4IIXQ
                 sudo docker pull choupaguy/nodo-todo-app-test:latest
                 sudo docker stop nodetodoapp || true
