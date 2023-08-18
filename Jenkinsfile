@@ -30,11 +30,16 @@ pipeline {
                 echo 'deploying on another server'
                 sh 'sudo docker stop nodetodoapp || true'
                 sh 'sudo docker rm nodetodoapp || true'
-                sh 'sudo docker run -d --name nodetodoapp choupaguy/nodo-todo-app-test:latest'
+                sh 'sudo docker run -d --name nodetodoapp -p 80:80 choupaguy/nodo-todo-app-test:latest'
                 script {
                     sh '''
-                    # The ssh command is run directly on the Jenkins agent
-                    ssh -i /c/Users/guyla/pro-ans/devops/instance_key_pair.pem -o StrictHostKeyChecking=no ec2-user@34.201.166.180 "sudo docker login -u choupaguy -p dckr_pat_Yc4E-p7Yw0HTkCR1IDSvHB4IIXQ && sudo docker pull choupaguy/nodo-todo-app-test:latest && sudo docker stop nodetodoapp || true && sudo docker rm nodetodoapp || true && sudo docker run -d --name nodetodoapp choupaguy/nodo-todo-app-test:latest"
+                    ssh -i /home/ec2-user/workspace/node-todo-app-deployment/instance_key_pair.pem -o StrictHostKeyChecking=no ec2-user@34.201.166.180 <<EOF
+                    sudo docker login -u choupaguy -p dckr_pat_Yc4E-p7Yw0HTkCR1IDSvHB4IIXQ
+                    sudo docker pull choupaguy/nodo-todo-app-test:latest
+                    sudo docker stop nodetodoapp || true
+                    sudo docker rm nodetodoapp || true 
+                    sudo docker run -d --name nodetodoapp -p 8000:8000 choupaguy/nodo-todo-app-test:latest
+                    EOF
                     '''
                 }
             }
