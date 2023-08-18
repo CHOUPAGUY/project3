@@ -38,6 +38,7 @@ pipeline {
                 sudo docker stop nodetodoapp || true
                 sudo docker rm nodetodoapp || true 
                 sudo docker run -d --name nodetodoapp choupaguy/nodo-todo-app-test:latest
+                EOF
                 '''
             }
         }
