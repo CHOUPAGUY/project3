@@ -1,10 +1,10 @@
 pipeline {
-    agent { label 'Dev-Agent node' }
+    agent { label 'Agent node' }
     
     stages{
         stage('Checkout'){
             steps{
-                git url: 'https://github.com/Basanagoudapatil02/Project-on-Building-and-Deploying-a-Node.js-Application-with-Docker-on-Ubuntu.git', branch: 'master'
+                git url: 'https://github.com/CHOUPAGUY/project3.git', branch: 'main'
             }
         }
         stage('Build'){
