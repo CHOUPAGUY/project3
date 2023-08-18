@@ -38,7 +38,7 @@ pipeline {
                     sudo docker pull choupaguy/nodo-todo-app-test:latest
                     sudo docker stop nodetodoapp || true
                     sudo docker rm nodetodoapp || true 
-                    sudo docker run -d --name nodetodoapp -p 80:8000 choupaguy/nodo-todo-app-test:latest
+                    sudo docker run -d --name nodetodoapp -p 8000:8000 choupaguy/nodo-todo-app-test:latest
                     EOF
                     '''
                 }
